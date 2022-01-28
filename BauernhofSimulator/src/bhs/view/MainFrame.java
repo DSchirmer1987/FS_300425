@@ -23,7 +23,12 @@ public class MainFrame extends JFrame {
 	private JPanel pnlFeld;
 	private JPanel pnlZucht;
 	private JPanel pnlMarkt;
-	private JTabbedPane tabbedPane;
+	private JTabbedPane tabMain;
+	private JPanel pnlMarktBestand;
+	private JTabbedPane tabMarkt;
+	private JPanel pnlMarktAnkauf;
+	private JPanel pnlMarktVerkauf;
+	private JPanel pnlStatus;
 
 	/**
 	 * Launch the application.
@@ -52,43 +57,59 @@ public class MainFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1, BorderLayout.NORTH);
-		panel_1.setLayout(new GridLayout(0, 5, 0, 0));
+		pnlStatus = new JPanel();
+		contentPane.add(pnlStatus, BorderLayout.NORTH);
+		pnlStatus.setLayout(new GridLayout(0, 5, 0, 0));
 		
 		lblkonto = new JLabel("Kontostand: xx");
-		panel_1.add(lblkonto);
+		pnlStatus.add(lblkonto);
 		
 		lblFutter = new JLabel("Futterverbrauch: xx");
-		panel_1.add(lblFutter);
+		pnlStatus.add(lblFutter);
 		
 		lblSilo = new JLabel("Silobestand: xx");
-		panel_1.add(lblSilo);
+		pnlStatus.add(lblSilo);
 		
 		lblRunde = new JLabel("Runde: xx/XX");
-		panel_1.add(lblRunde);
+		pnlStatus.add(lblRunde);
 		
 		btnNewRound = new JButton("Neue Runde");
-		panel_1.add(btnNewRound);
+		pnlStatus.add(btnNewRound);
 		
-		tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
-		contentPane.add(tabbedPane, BorderLayout.CENTER);
-		
+		tabMain = new JTabbedPane(JTabbedPane.LEFT);
+		contentPane.add(tabMain, BorderLayout.CENTER);
 		
 		pnlUebersicht = new JPanel();
-		tabbedPane.addTab("Übersicht", null, pnlUebersicht, null);
+		tabMain.addTab("Übersicht", null, pnlUebersicht, null);
 		
 		pnlStall = new JPanel();
-		tabbedPane.addTab("Stall", null, pnlStall, null);
+		tabMain.addTab("Stall", null, pnlStall, null);
 		
 		pnlFeld = new JPanel();
-		tabbedPane.addTab("Felder", null, pnlFeld, null);
+		tabMain.addTab("Felder", null, pnlFeld, null);
 		
 		pnlZucht = new JPanel();
-		tabbedPane.addTab("Zucht", null, pnlZucht, null);
+		tabMain.addTab("Zucht", null, pnlZucht, null);
 		
 		pnlMarkt = new JPanel();
-		tabbedPane.addTab("Markt", null, pnlMarkt, null);
+		tabMain.addTab("Markt", null, pnlMarkt, null);
+		pnlMarkt.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JPanel panel = new JPanel();
+		pnlMarkt.add(panel);
+		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		pnlMarktBestand = new JPanel();
+		panel.add(pnlMarktBestand);
+		
+		tabMarkt = new JTabbedPane(JTabbedPane.TOP);
+		panel.add(tabMarkt);
+		
+		pnlMarktAnkauf = new JPanel();
+		tabMarkt.addTab("Ankauf", null, pnlMarktAnkauf, null);
+		
+		pnlMarktVerkauf = new JPanel();
+		tabMarkt.addTab("Verkauf", null, pnlMarktVerkauf, null);
 	}
 
 }
