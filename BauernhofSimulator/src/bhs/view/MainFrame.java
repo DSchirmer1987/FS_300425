@@ -13,6 +13,7 @@ import javax.swing.UIManager;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import java.awt.Font;
 
 public class MainFrame extends JFrame {
 
@@ -82,6 +83,7 @@ public class MainFrame extends JFrame {
 		pnlStatus.add(btnNewRound);
 		
 		tabMain = new JTabbedPane(JTabbedPane.LEFT);
+		tabMain.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		contentPane.add(tabMain, BorderLayout.CENTER);
 		
 		pnlUebersicht = new JPanel();
