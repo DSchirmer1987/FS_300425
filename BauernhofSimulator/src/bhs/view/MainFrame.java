@@ -1,11 +1,15 @@
 package bhs.view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -50,6 +54,7 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 730, 480);
 		contentPane = new JPanel();
@@ -81,6 +86,10 @@ public class MainFrame extends JFrame {
 		
 		pnlUebersicht = new JPanel();
 		tabMain.addTab("Übersicht", null, pnlUebersicht, null);
+		JLabel lblTabUebersicht = new JLabel("Übersicht");
+		lblTabUebersicht.setPreferredSize(new Dimension(150, 50));
+		lblTabUebersicht.setHorizontalAlignment(SwingConstants.CENTER);
+		tabMain.setTabComponentAt(0, lblTabUebersicht);
 		
 		pnlStall = new JPanel();
 		tabMain.addTab("Stall", null, pnlStall, null);
