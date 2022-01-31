@@ -8,6 +8,7 @@ import java.util.Arrays;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.ImageIcon;
 
 public class MainTabbedPane extends JTabbedPane{
 	private Dimension tabSize;
