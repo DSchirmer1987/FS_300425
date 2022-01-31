@@ -8,11 +8,14 @@ import java.util.Arrays;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
+import bhs.view.panels.UebersichtPanel;
+
 import javax.swing.ImageIcon;
 
 public class MainTabbedPane extends JTabbedPane{
 	private Dimension tabSize;
-	private JPanel pnlUebersicht = new JPanel();
+	private UebersichtPanel pnlUebersicht = new UebersichtPanel();
 	private JPanel pnlStall = new JPanel();
 	private JPanel pnlFeld = new JPanel();
 	private JPanel pnlZucht = new JPanel();
