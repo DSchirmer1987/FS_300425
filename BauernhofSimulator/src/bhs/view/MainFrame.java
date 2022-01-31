@@ -23,20 +23,28 @@ public class MainFrame extends JFrame {
 	private JPanel pnlStatus;
 	private MainTabbedPane mtp;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainFrame frame = new MainFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public JLabel getLblkonto() {
+		return lblkonto;
+	}
+
+	public JLabel getLblFutter() {
+		return lblFutter;
+	}
+
+	public JLabel getLblSilo() {
+		return lblSilo;
+	}
+
+	public JLabel getLblRunde() {
+		return lblRunde;
+	}
+
+	public MainTabbedPane getMtp() {
+		return mtp;
+	}
+
+	public JButton getBtnNewRound() {
+		return btnNewRound;
 	}
 
 	/**

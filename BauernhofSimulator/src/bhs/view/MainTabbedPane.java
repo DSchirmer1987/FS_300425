@@ -9,20 +9,43 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import bhs.view.panels.FeldPanel;
+import bhs.view.panels.StallPanel;
 import bhs.view.panels.UebersichtPanel;
+import bhs.view.panels.ZuchtPanel;
 
 import javax.swing.ImageIcon;
 
 public class MainTabbedPane extends JTabbedPane{
 	private Dimension tabSize;
 	private UebersichtPanel pnlUebersicht = new UebersichtPanel();
-	private JPanel pnlStall = new JPanel();
-	private JPanel pnlFeld = new JPanel();
-	private JPanel pnlZucht = new JPanel();
+	private StallPanel pnlStall = new StallPanel();
+	private FeldPanel pnlFeld = new FeldPanel();
+	private ZuchtPanel pnlZucht = new ZuchtPanel();
 	private Marktpanel pnlMarkt = new Marktpanel();
 	private JTabbedPane tabMarkt;
 	private JLabel[] tabs;
 	
+	public UebersichtPanel getPnlUebersicht() {
+		return pnlUebersicht;
+	}
+	
+	public StallPanel getPnlStall() {
+		return pnlStall;
+	}
+
+	public FeldPanel getPnlFeld() {
+		return pnlFeld;
+	}
+
+	public ZuchtPanel getPnlZucht() {
+		return pnlZucht;
+	}
+
+	public Marktpanel getPnlMarkt() {
+		return pnlMarkt;
+	}
+
 	public MainTabbedPane() {
 		this.tabSize = new Dimension(150, 50);
 		this.setTabPlacement(JTabbedPane.LEFT);

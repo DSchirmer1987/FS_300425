@@ -13,13 +13,37 @@ import javax.swing.SwingConstants;
 import javax.swing.ListSelectionModel;
 
 public class UebersichtPanel extends JPanel {
-	private JList pflanzenListe;
-	private JList produktListe;
-	private JList tierListe;
-	private JList produktAnzahl;
-	private JList tierAnzahl;
-	private JList pflanzenAnzahl;
+	private JList<String> pflanzenListe;
+	private JList<String> produktListe;
+	private JList<String> tierListe;
+	private JList<Integer> produktAnzahl;
+	private JList<Integer> tierAnzahl;
+	private JList<Integer> pflanzenAnzahl;
 	
+	public JList<String> getPflanzenListe() {
+		return pflanzenListe;
+	}
+
+	public JList<String> getProduktListe() {
+		return produktListe;
+	}
+
+	public JList<String> getTierListe() {
+		return tierListe;
+	}
+
+	public JList<Integer> getProduktAnzahl() {
+		return produktAnzahl;
+	}
+
+	public JList<Integer> getTierAnzahl() {
+		return tierAnzahl;
+	}
+
+	public JList<Integer> getPflanzenAnzahl() {
+		return pflanzenAnzahl;
+	}
+
 	public UebersichtPanel() {
 		setLayout(new GridLayout(1, 0, 5, 0));
 		
@@ -31,29 +55,11 @@ public class UebersichtPanel extends JPanel {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblNewLabel, BorderLayout.NORTH);
 		
-		pflanzenListe = new JList();
+		pflanzenListe = new JList<String>();
 		pflanzenListe.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		pflanzenListe.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Karotte", "Chinakohl", "Kartoffel"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
 		panel.add(pflanzenListe, BorderLayout.CENTER);
 		
-		pflanzenAnzahl = new JList();
-		pflanzenAnzahl.setModel(new AbstractListModel() {
-			String[] values = new String[] {"0", "1", "24"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
+		pflanzenAnzahl = new JList<Integer>();
 		panel.add(pflanzenAnzahl, BorderLayout.EAST);
 		
 		JPanel panel_1 = new JPanel();
@@ -64,7 +70,7 @@ public class UebersichtPanel extends JPanel {
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(lblNewLabel_1, BorderLayout.NORTH);
 		
-		tierListe = new JList();
+		tierListe = new JList<String>();
 		tierListe.setModel(new AbstractListModel() {
 			String[] values = new String[] {"Kuh", "Schaf", "Schwein"};
 			public int getSize() {
@@ -76,7 +82,7 @@ public class UebersichtPanel extends JPanel {
 		});
 		panel_1.add(tierListe, BorderLayout.CENTER);
 		
-		tierAnzahl = new JList();
+		tierAnzahl = new JList<Integer>();
 		tierAnzahl.setModel(new AbstractListModel() {
 			String[] values = new String[] {"1", "2", "3"};
 			public int getSize() {
@@ -96,10 +102,10 @@ public class UebersichtPanel extends JPanel {
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_2.add(lblNewLabel_2, BorderLayout.NORTH);
 		
-		produktListe = new JList();
+		produktListe = new JList<String>();
 		panel_2.add(produktListe, BorderLayout.CENTER);
 		
-		produktAnzahl = new JList();
+		produktAnzahl = new JList<Integer>();
 		produktAnzahl.setModel(new AbstractListModel() {
 			String[] values = new String[] {"2", "3", "4"};
 			public int getSize() {
