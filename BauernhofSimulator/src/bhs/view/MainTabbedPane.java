@@ -60,7 +60,6 @@ public class MainTabbedPane extends JTabbedPane{
 	
 	private void setTabs(String[] tabTitles) {
 		this.tabs = new JLabel[tabTitles.length];
-		System.out.println(Arrays.toString(tabs));
 		for (int i = 0; i < tabTitles.length; i++) {
 			this.tabs[i] = new JLabel();
 			this.tabs[i].setPreferredSize(tabSize);
