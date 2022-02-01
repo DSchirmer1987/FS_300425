@@ -1,15 +1,22 @@
 package bhs.controller;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.AbstractListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import bhs.view.MainFrame;
+import bhs.view.MainTabbedPane;
 
 public class BHSController {
 	private MainFrame frame;
+	private MainTabbedPane mtp;
 	private JList<String> pflanzenListe;
 	private JList<String> produktListe;
 	private JList<String> tierListe;
@@ -36,7 +43,9 @@ public class BHSController {
 	}
 	
 	public void init() {
+		// Attribute setzen
 		this.frame = new MainFrame();
+		this.mtp = frame.getMtp();
 		this.pflanzenListe = frame.getMtp().getPnlUebersicht().getPflanzenListe();
 		this.produktListe = frame.getMtp().getPnlUebersicht().getProduktListe();
 		this.tierListe = frame.getMtp().getPnlUebersicht().getTierListe();
@@ -48,10 +57,14 @@ public class BHSController {
 		this.lblSilo = frame.getLblSilo();
 		this.lblRunde = frame.getLblRunde();
 		this.btnNewRound = frame.getBtnNewRound();
+		// Daten
 		this.setPflanzen();
 		this.setTiere();
 		this.setProdukte();
 		this.setStatus();
+		// Listeners
+		this.setTabChangeListener();
+		this.setNewRoundAction();
 	}
 	
 	public void setPflanzen() {
@@ -139,5 +152,28 @@ public class BHSController {
 		this.lblFutter.setText("Verbrauch: " + verbrauch);
 		this.lblSilo.setText("Bestand: " + silo);
 		this.lblRunde.setText("Runde: " + runde + "/" + maxRunden);
+	}
+	
+	public void setTabChangeListener() {
+		this.mtp.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				System.out.println("Tab: " + mtp.getSelectedIndex());
+				if(mtp.getSelectedIndex() ==  0) {
+					setPflanzen();
+					setTiere();
+					setProdukte();
+				}
+			}
+		});
+	}
+	
+	public void setNewRoundAction() {
+		this.btnNewRound.addActionListener(new ActionListener() {			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mtp.setSelectedIndex(0);	
+			}
+		});
 	}
 }
