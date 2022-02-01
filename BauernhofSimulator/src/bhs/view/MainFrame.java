@@ -18,6 +18,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.BoxLayout;
 import java.awt.Component;
+import javax.swing.JList;
 
 public class MainFrame extends JFrame {
 

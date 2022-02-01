@@ -71,27 +71,9 @@ public class UebersichtPanel extends JPanel {
 		panel_1.add(lblNewLabel_1, BorderLayout.NORTH);
 		
 		tierListe = new JList<String>();
-		tierListe.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Kuh", "Schaf", "Schwein"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
 		panel_1.add(tierListe, BorderLayout.CENTER);
 		
 		tierAnzahl = new JList<Integer>();
-		tierAnzahl.setModel(new AbstractListModel() {
-			String[] values = new String[] {"1", "2", "3"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
 		panel_1.add(tierAnzahl, BorderLayout.EAST);
 		
 		JPanel panel_2 = new JPanel();
@@ -106,15 +88,6 @@ public class UebersichtPanel extends JPanel {
 		panel_2.add(produktListe, BorderLayout.CENTER);
 		
 		produktAnzahl = new JList<Integer>();
-		produktAnzahl.setModel(new AbstractListModel() {
-			String[] values = new String[] {"2", "3", "4"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
 		panel_2.add(produktAnzahl, BorderLayout.EAST);
 		
 		pflanzenListe.setSelectionModel(new DisabledItemSelection());
