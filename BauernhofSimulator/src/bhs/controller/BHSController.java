@@ -49,6 +49,9 @@ public class BHSController {
 		this.lblRunde = frame.getLblRunde();
 		this.btnNewRound = frame.getBtnNewRound();
 		this.setPflanzen();
+		this.setTiere();
+		this.setProdukte();
+		this.setStatus();
 	}
 	
 	public void setPflanzen() {
@@ -74,5 +77,67 @@ public class BHSController {
 				return values[index];
 			}
 		});
+	}
+	
+	public void setTiere() {
+//		Daten für Tiere holen
+		String[] tiere = {"Kuh", "Schaf", "Schwein"};
+		Integer[] anzahl = {1,2,3};
+		this.tierListe.setModel(new AbstractListModel<String>() {
+			String[] values = tiere;
+			public int getSize() {
+				return values.length;
+			}
+			public String getElementAt(int index) {
+				return values[index];
+			}
+		});
+		this.tierAnzahl.setModel(new AbstractListModel<Integer>() {
+			Integer[] values = anzahl;
+			public int getSize() {
+				return values.length;
+			}
+			public Integer getElementAt(int index) {
+				return values[index];
+			}
+		});
+	}
+	
+	public void setProdukte() {
+//		Daten für Produkte holen
+		String[] produkte = {"Milch", "Wolle", "Speck"};
+		Integer[] anzahl = {1,2,3};
+		this.produktListe.setModel(new AbstractListModel<String>() {
+			String[] values = produkte;
+			public int getSize() {
+				return values.length;
+			}
+			public String getElementAt(int index) {
+				return values[index];
+			}
+		});
+		this.produktAnzahl.setModel(new AbstractListModel<Integer>() {
+			Integer[] values = anzahl;
+			public int getSize() {
+				return values.length;
+			}
+			public Integer getElementAt(int index) {
+				return values[index];
+			}
+		});		
+	}
+	
+	public void setStatus(){
+		// Daten für die Status anzeige holen
+		Double konto = 2456.45;
+		Integer verbrauch = 25;
+		Integer silo = 76;
+		Integer runde = 25;
+		Integer maxRunden = 100;
+		
+		this.lblkonto.setText("Konto: " + konto);
+		this.lblFutter.setText("Verbrauch: " + verbrauch);
+		this.lblSilo.setText("Bestand: " + silo);
+		this.lblRunde.setText("Runde: " + runde + "/" + maxRunden);
 	}
 }

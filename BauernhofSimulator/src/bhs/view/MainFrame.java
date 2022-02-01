@@ -11,6 +11,13 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
+import javax.swing.SwingConstants;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.BoxLayout;
+import java.awt.Component;
 
 public class MainFrame extends JFrame {
 
@@ -53,7 +60,7 @@ public class MainFrame extends JFrame {
 	public MainFrame() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 730, 480);
+		setBounds(100, 100, 800, 480);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -80,6 +87,8 @@ public class MainFrame extends JFrame {
 		pnlStatus.add(lblRunde);
 		
 		btnNewRound = new JButton("Neue Runde");
+		btnNewRound.setIconTextGap(0);
+		btnNewRound.setMargin(new Insets(2, 2, 2, 2));
 		btnNewRound.setFont(new Font("Arial", Font.PLAIN, 16));
 		pnlStatus.add(btnNewRound);
 		
