@@ -3,12 +3,16 @@ package bhs.controller;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
+import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -35,6 +39,7 @@ public class BHSController {
 	private JLabel lblSilo;
 	private JLabel lblRunde;
 	private JButton btnNewRound;
+	private JButton btnMelken;
 	
 	public BHSController() {
 		EventQueue.invokeLater(new Runnable() {
@@ -67,6 +72,7 @@ public class BHSController {
 		this.lblSilo = frame.getLblSilo();
 		this.lblRunde = frame.getLblRunde();
 		this.btnNewRound = frame.getBtnNewRound();
+		this.btnMelken = frame.getMtp().getPnlStall().getBtnMelken();
 		// Daten
 		this.setPflanzen();
 		this.setTiere();
@@ -75,6 +81,7 @@ public class BHSController {
 		// Listeners
 		this.setTabChangeListener();
 		this.setNewRoundAction();
+		this.setMelkenAction();
 	}
 	
 	/*
@@ -231,6 +238,28 @@ public class BHSController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				mtp.setSelectedIndex(0);	
+			}
+		});
+	}
+	
+	public void setMelkenAction() {
+		this.btnMelken.addActionListener(new ActionListener() {
+			ArrayList<Kuh> kuhAL;
+			Integer melkmenge = 0;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					kuhAL = (ArrayList<Kuh>) kuhListe.getSelectedValuesList();
+					System.out.println(kuhAL);
+					for (Kuh kuh : kuhAL) {
+						if(kuh.getErwachsen()) {
+							melkmenge += kuh.melken();
+						}
+					}
+					System.out.println("Es wurde " + melkmenge + "L Milch erzeugt.");
+				} catch (ClassCastException e1) {
+					JOptionPane.showMessageDialog(frame, "Bitte mindestens eine Kuh auswählen", "Melken", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 	}
