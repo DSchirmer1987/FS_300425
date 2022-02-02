@@ -294,7 +294,7 @@ public class BHSController {
 	}
 	
 	public void setSchlachtenAction() {
-		this.btnScheren.addActionListener(new ActionListener() {
+		this.btnSchlachten.addActionListener(new ActionListener() {
 			ArrayList<Schwein> schweinAL;
 			Double speckmenge = 0.0;
 			@Override
