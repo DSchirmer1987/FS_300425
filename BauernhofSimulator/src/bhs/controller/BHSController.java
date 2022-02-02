@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.AbstractAction;
@@ -40,6 +41,8 @@ public class BHSController {
 	private JLabel lblRunde;
 	private JButton btnNewRound;
 	private JButton btnMelken;
+	private JButton btnScheren;
+	private JButton btnSchlachten;
 	
 	public BHSController() {
 		EventQueue.invokeLater(new Runnable() {
@@ -73,6 +76,8 @@ public class BHSController {
 		this.lblRunde = frame.getLblRunde();
 		this.btnNewRound = frame.getBtnNewRound();
 		this.btnMelken = frame.getMtp().getPnlStall().getBtnMelken();
+		this.btnScheren = frame.getMtp().getPnlStall().getBtnScheren();
+		this.btnSchlachten = frame.getMtp().getPnlStall().getBtnSchlachten();
 		// Daten
 		this.setPflanzen();
 		this.setTiere();
@@ -82,6 +87,8 @@ public class BHSController {
 		this.setTabChangeListener();
 		this.setNewRoundAction();
 		this.setMelkenAction();
+		this.setScherenAction();
+		this.setSchlachtenAction();
 	}
 	
 	/*
@@ -260,6 +267,49 @@ public class BHSController {
 				} catch (ClassCastException e1) {
 					JOptionPane.showMessageDialog(frame, "Bitte mindestens eine Kuh auswählen", "Melken", JOptionPane.INFORMATION_MESSAGE);
 				}
+				kuhListe.clearSelection();
+			}
+		});
+	}
+	
+	public void setScherenAction() {
+		this.btnScheren.addActionListener(new ActionListener() {
+			ArrayList<Schaf> schafAL;
+			Integer schermenge = 0;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					schafAL = (ArrayList<Schaf>) schafListe.getSelectedValuesList();
+					for (Schaf schaf : schafAL) {
+						if(schaf.getErwachsen()) {
+							schermenge += schaf.scheren();
+						}
+					}
+				} catch (ClassCastException e1) {
+					JOptionPane.showMessageDialog(frame, "Bitte mindestens ein Schaf auswählen", "Scheren", JOptionPane.INFORMATION_MESSAGE);
+				}
+				schafListe.clearSelection();
+			}
+		});	
+	}
+	
+	public void setSchlachtenAction() {
+		this.btnScheren.addActionListener(new ActionListener() {
+			ArrayList<Schwein> schweinAL;
+			Double speckmenge = 0.0;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					schweinAL = (ArrayList<Schwein>) schweinListe.getSelectedValuesList();
+					for (Schwein schwein : schweinAL) {
+						if(schwein.getErwachsen()) {
+							speckmenge += schwein.schlachten();
+						}
+					}
+				} catch (ClassCastException e1) {
+					JOptionPane.showMessageDialog(frame, "Bitte mindestens ein Schwein auswählen", "Scheren", JOptionPane.INFORMATION_MESSAGE);
+				}
+				schweinListe.clearSelection();
 			}
 		});
 	}
