@@ -5,11 +5,70 @@ public abstract class Tier {
 	private Double gewicht;
 	private Integer hunger;
 	private Boolean erwachsen;
+	private String status;
 	
 	public Tier() {
-		this.alter = 0;
-		this.gewicht = 0.00;
+		this.alter = 1;
+		this.gewicht = 5.00;
 		this.hunger = 0;
 		this.erwachsen = false;
+	}
+
+	public Integer getAlter() {
+		return alter;
+	}
+
+	public void setAlter(Integer alter) {
+		this.alter = alter;
+		if(this.alter >= 6) {
+			this.erwachsen = true;
+		}
+	}
+
+	public Double getGewicht() {
+		return gewicht;
+	}
+
+	public void setGewicht(Double gewicht) {
+		this.gewicht = gewicht;
+	}
+
+	public Integer getHunger() {
+		return hunger;
+	}
+
+	public void setHunger(Integer hunger) {
+		this.hunger = hunger;
+	}
+
+	public Boolean getErwachsen() {
+		return erwachsen;
+	}
+
+	public void setErwachsen(Boolean erwachsen) {
+		this.erwachsen = erwachsen;
+	}
+	
+	public String toString() {
+		return "Alter: " + this.getAlter() + " Gewicht: " + this.getGewicht() + " " + this.getStatus();
+	}
+	
+	public String getStatus() {
+		if(this.getErwachsen()) {
+			this.status = "erwachsen";
+		} else {
+			this.status = "jung";
+		}
+		if(this.getHunger() == 0) {
+			this.status += "/satt";
+		} else {
+			this.status = this.status + "/hungrig";
+		}
+		return this.status;
+	}
+	
+	public void fuettern() {
+		this.hunger = 0;
+		this.gewicht = this.gewicht + 5;
 	}
 }

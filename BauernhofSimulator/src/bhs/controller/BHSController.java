@@ -3,6 +3,7 @@ package bhs.controller;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.AbstractListModel;
 import javax.swing.JButton;
@@ -11,6 +12,9 @@ import javax.swing.JList;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import bhs.model.tier.Kuh;
+import bhs.model.tier.Schaf;
+import bhs.model.tier.Schwein;
 import bhs.view.MainFrame;
 import bhs.view.MainTabbedPane;
 
@@ -23,6 +27,9 @@ public class BHSController {
 	private JList<Integer> produktAnzahl;
 	private JList<Integer> tierAnzahl;
 	private JList<Integer> pflanzenAnzahl;
+	private JList<Kuh> kuhListe;
+	private JList<Schaf> schafListe;
+	private JList<Schwein> schweinListe;
 	private JLabel lblkonto;
 	private JLabel lblFutter;
 	private JLabel lblSilo;
@@ -52,6 +59,9 @@ public class BHSController {
 		this.pflanzenAnzahl = frame.getMtp().getPnlUebersicht().getPflanzenAnzahl();
 		this.tierAnzahl = frame.getMtp().getPnlUebersicht().getTierAnzahl();
 		this.produktAnzahl = frame.getMtp().getPnlUebersicht().getProduktAnzahl();
+		this.kuhListe = frame.getMtp().getPnlStall().getKuhListe();
+		this.schafListe = frame.getMtp().getPnlStall().getSchafListe();
+		this.schweinListe = frame.getMtp().getPnlStall().getSchweinListe();
 		this.lblkonto = frame.getLblkonto();
 		this.lblFutter = frame.getLblFutter();
 		this.lblSilo = frame.getLblSilo();
@@ -67,6 +77,9 @@ public class BHSController {
 		this.setNewRoundAction();
 	}
 	
+	/*
+	 * Daten
+	 */
 	public void setPflanzen() {
 //		Daten der Pflanzen holen
 		String[] pflanzen = {"Chinakohl", "Karotten", "Birne", "Kartoffel", "Apfel"};
@@ -154,15 +167,60 @@ public class BHSController {
 		this.lblRunde.setText("Runde: " + runde + "/" + maxRunden);
 	}
 	
+	public void setKuehe() {
+		// Daten holen
+		Kuh[] kuehe = {new Kuh(), new Kuh(), new Kuh()};
+		this.kuhListe.setModel(new AbstractListModel<Kuh>() {
+			public int getSize() {
+				return kuehe.length;
+			}
+			public Kuh getElementAt(int index) {
+				return kuehe[index];
+			}
+		});
+	}
+	
+	public void setSchafe() {
+		// Daten holen
+		Schaf[] schafe = {new Schaf(), new Schaf(), new Schaf()};
+		this.schafListe.setModel(new AbstractListModel<Schaf>() {
+			public int getSize() {
+				return schafe.length;
+			}
+			public Schaf getElementAt(int index) {
+				return schafe[index];
+			}
+		});
+	}
+	
+	public void setSchweine() {
+		// Daten holen
+		Schwein[] schweine = {new Schwein(), new Schwein(), new Schwein()};
+		this.schweinListe.setModel(new AbstractListModel<Schwein>() {
+			public int getSize() {
+				return schweine.length;
+			}
+			public Schwein getElementAt(int index) {
+				return schweine[index];
+			}
+		});
+	}
+	
+	/*
+	 * Listeners
+	 */
 	public void setTabChangeListener() {
 		this.mtp.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				System.out.println("Tab: " + mtp.getSelectedIndex());
 				if(mtp.getSelectedIndex() ==  0) {
 					setPflanzen();
 					setTiere();
 					setProdukte();
+				} else if (mtp.getSelectedIndex() == 1) {
+					setKuehe();
+					setSchafe();
+					setSchweine();
 				}
 			}
 		});
