@@ -10,13 +10,17 @@ import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.AbstractListModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import bhs.model.Feld;
+import bhs.model.pflanze.Pflanze;
 import bhs.model.tier.Kuh;
 import bhs.model.tier.Schaf;
 import bhs.model.tier.Schwein;
@@ -35,6 +39,8 @@ public class BHSController {
 	private JList<Kuh> kuhListe;
 	private JList<Schaf> schafListe;
 	private JList<Schwein> schweinListe;
+	private JList<Feld> feldListe;
+	private JComboBox<String> cbPflanze;
 	private JLabel lblkonto;
 	private JLabel lblFutter;
 	private JLabel lblSilo;
@@ -43,6 +49,9 @@ public class BHSController {
 	private JButton btnMelken;
 	private JButton btnScheren;
 	private JButton btnSchlachten;
+	private JButton btnErnten;
+	private JButton btnPflanzen;
+	private ArrayList<Feld> felder;
 	
 	public BHSController() {
 		EventQueue.invokeLater(new Runnable() {
@@ -70,6 +79,8 @@ public class BHSController {
 		this.kuhListe = frame.getMtp().getPnlStall().getKuhListe();
 		this.schafListe = frame.getMtp().getPnlStall().getSchafListe();
 		this.schweinListe = frame.getMtp().getPnlStall().getSchweinListe();
+		this.feldListe = frame.getMtp().getPnlFeld().getFeldListe();
+		this.cbPflanze = frame.getMtp().getPnlFeld().getCbPflanze();
 		this.lblkonto = frame.getLblkonto();
 		this.lblFutter = frame.getLblFutter();
 		this.lblSilo = frame.getLblSilo();
@@ -78,17 +89,29 @@ public class BHSController {
 		this.btnMelken = frame.getMtp().getPnlStall().getBtnMelken();
 		this.btnScheren = frame.getMtp().getPnlStall().getBtnScheren();
 		this.btnSchlachten = frame.getMtp().getPnlStall().getBtnSchlachten();
+		this.btnErnten = frame.getMtp().getPnlFeld().getBntErnten();
+		this.btnPflanzen = frame.getMtp().getPnlFeld().getBtnPflanzen();
 		// Daten
 		this.setPflanzen();
 		this.setTiere();
 		this.setProdukte();
 		this.setStatus();
+		this.setCBPflanzen();
+		this.felder = new ArrayList<Feld>();
 		// Listeners
 		this.setTabChangeListener();
 		this.setNewRoundAction();
 		this.setMelkenAction();
 		this.setScherenAction();
 		this.setSchlachtenAction();
+		this.setPflanzenAction();
+		
+		// Testdaten
+		felder.add(new Feld());
+		felder.add(new Feld());
+		felder.add(new Feld());
+		felder.add(new Feld());
+		felder.add(new Feld());// - Wird später im Markt geregelt
 	}
 	
 	/*
@@ -220,21 +243,48 @@ public class BHSController {
 		});
 	}
 	
+	public void setCBPflanzen() {
+		String[] pflanzenSorten = {"Apfel", "Birne", "Chinakohl", "Karotte", "Kartoffel"};
+		this.cbPflanze.setModel(new DefaultComboBoxModel<>(pflanzenSorten));
+	}
+	
+	public void setFelder() {
+		Feld[] felderArray = this.felder.toArray(new Feld[0]);
+		this.feldListe.setModel(new AbstractListModel<Feld>() {
+			public int getSize() {
+				return felderArray.length;
+			}
+			
+			public Feld getElementAt(int index) {
+				return felderArray[index];
+			}
+		});
+	}
+	
 	/*
 	 * Listeners
 	 */
 	public void setTabChangeListener() {
 		this.mtp.addChangeListener(new ChangeListener() {
 			@Override
-			public void stateChanged(ChangeEvent e) {
-				if(mtp.getSelectedIndex() ==  0) {
-					setPflanzen();
-					setTiere();
-					setProdukte();
-				} else if (mtp.getSelectedIndex() == 1) {
-					setKuehe();
-					setSchafe();
-					setSchweine();
+			public void stateChanged(ChangeEvent e) {		
+				switch(mtp.getSelectedIndex()) {
+					case 0:{
+						setPflanzen();
+						setTiere();
+						setProdukte();
+						break;
+					}
+					case 1:{
+						setKuehe();
+						setSchafe();
+						setSchweine();
+						break;
+					}
+					case 2:{
+						setFelder();
+						break;
+					}
 				}
 			}
 		});
@@ -307,9 +357,29 @@ public class BHSController {
 						}
 					}
 				} catch (ClassCastException e1) {
-					JOptionPane.showMessageDialog(frame, "Bitte mindestens ein Schwein auswählen", "Scheren", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "Bitte mindestens ein Schwein auswählen", "Schlachten", JOptionPane.INFORMATION_MESSAGE);
 				}
 				schweinListe.clearSelection();
+			}
+		});
+	}
+	
+	public void setPflanzenAction() {
+		this.btnPflanzen.addActionListener(new ActionListener() {
+			ArrayList<Feld> selectedFeld;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int index = cbPflanze.getSelectedIndex();
+				String sorte = cbPflanze.getItemAt(index);
+				try {
+					selectedFeld = (ArrayList<Feld>) feldListe.getSelectedValuesList();
+					for (Feld feld : selectedFeld) {
+						feld.bepflanzen(sorte);
+					}
+					setFelder();
+				} catch (ClassCastException e1) {
+					JOptionPane.showMessageDialog(frame, "Bitte mindestens ein Feld auswählen", "Bepflanzen", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 	}
