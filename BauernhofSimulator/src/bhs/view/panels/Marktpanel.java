@@ -1,4 +1,4 @@
-package bhs.view;
+package bhs.view.panels;
 
 import java.awt.GridLayout;
 

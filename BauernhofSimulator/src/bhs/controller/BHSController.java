@@ -26,6 +26,7 @@ import bhs.model.tier.Schaf;
 import bhs.model.tier.Schwein;
 import bhs.view.MainFrame;
 import bhs.view.MainTabbedPane;
+import bhs.view.panels.ZuchtStallPanel;
 
 public class BHSController {
 	private MainFrame frame;
@@ -52,6 +53,7 @@ public class BHSController {
 	private JButton btnErnten;
 	private JButton btnPflanzen;
 	private ArrayList<Feld> felder;
+	private ZuchtStallPanel[] zuchtStallPanels;
 	
 	public BHSController() {
 		EventQueue.invokeLater(new Runnable() {
@@ -91,6 +93,7 @@ public class BHSController {
 		this.btnSchlachten = frame.getMtp().getPnlStall().getBtnSchlachten();
 		this.btnErnten = frame.getMtp().getPnlFeld().getBntErnten();
 		this.btnPflanzen = frame.getMtp().getPnlFeld().getBtnPflanzen();
+		this.zuchtStallPanels = frame.getMtp().getPnlZucht().getZuchtStaelle();
 		// Daten
 		this.setPflanzen();
 		this.setTiere();
@@ -105,6 +108,7 @@ public class BHSController {
 		this.setScherenAction();
 		this.setSchlachtenAction();
 		this.setPflanzenAction();
+		this.setZuchtAction();
 		
 		// Testdaten
 		felder.add(new Feld());
@@ -249,16 +253,22 @@ public class BHSController {
 	}
 	
 	public void setFelder() {
-		Feld[] felderArray = this.felder.toArray(new Feld[0]);
 		this.feldListe.setModel(new AbstractListModel<Feld>() {
 			public int getSize() {
-				return felderArray.length;
+				return felder.size();
 			}
 			
 			public Feld getElementAt(int index) {
-				return felderArray[index];
+				return felder.get(index);
 			}
 		});
+	}
+	
+	public void setZuchtCBTier() {
+		String[] tiere = {"Kuh", "Schaf", "Schwein"};
+		for (ZuchtStallPanel zsp : zuchtStallPanels) {
+			zsp.getCbTier().setModel(new DefaultComboBoxModel<String>(tiere));
+		}
 	}
 	
 	/*
@@ -283,6 +293,10 @@ public class BHSController {
 					}
 					case 2:{
 						setFelder();
+						break;
+					}
+					case 3:{
+						setZuchtCBTier();
 						break;
 					}
 				}
@@ -382,5 +396,16 @@ public class BHSController {
 				}
 			}
 		});
+	}
+	
+	public void setZuchtAction() {
+		for (ZuchtStallPanel zsp : zuchtStallPanels) {
+			zsp.getBtnZucht().addActionListener(new ActionListener() {			
+				public void actionPerformed(ActionEvent e) {
+					String tierArt = (String) zsp.getCbTier().getItemAt(zsp.getCbTier().getSelectedIndex());
+					System.out.println("Zucht in " + zsp.getLblZuchtstall().getText() + " mit der Tierart " + tierArt + " gestartet.");
+				}
+			});
+		}
 	}
 }

@@ -1,16 +1,14 @@
 package bhs.view.panels;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
-import javax.swing.DefaultListSelectionModel;
-
-import java.awt.GridLayout;
 import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
+import java.awt.GridLayout;
+
+import javax.swing.DefaultListSelectionModel;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 
 public class UebersichtPanel extends JPanel {
 	private JList<String> pflanzenListe;

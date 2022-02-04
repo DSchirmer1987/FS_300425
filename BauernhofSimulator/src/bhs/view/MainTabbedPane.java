@@ -2,19 +2,15 @@ package bhs.view;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.util.Arrays;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import bhs.view.panels.FeldPanel;
+import bhs.view.panels.Marktpanel;
 import bhs.view.panels.StallPanel;
 import bhs.view.panels.UebersichtPanel;
 import bhs.view.panels.ZuchtPanel;
-
-import javax.swing.ImageIcon;
 
 public class MainTabbedPane extends JTabbedPane{
 	private Dimension tabSize;
