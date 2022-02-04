@@ -44,5 +44,6 @@ public class ZuchtStallPanel extends JPanel {
 		centerPanel.add(cbTier);
 		centerPanel.add(btnZucht);
 		this.staticCounter++;
+		this.setVisible(false);
 	}
 }

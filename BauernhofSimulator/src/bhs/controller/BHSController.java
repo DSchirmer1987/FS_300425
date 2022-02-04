@@ -115,7 +115,8 @@ public class BHSController {
 		felder.add(new Feld());
 		felder.add(new Feld());
 		felder.add(new Feld());
-		felder.add(new Feld());// - Wird später im Markt geregelt
+		felder.add(new Feld());
+		this.zuchtStallPanels[0].setVisible(true);// - Wird später im Markt geregelt
 	}
 	
 	/*
