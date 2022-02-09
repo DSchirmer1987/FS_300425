@@ -18,6 +18,11 @@ public class ReadJSONUrl {
 			JSONReader readerArray = new JSONReader(urlArray);
 			JSONArray myJSONArray = readerArray.readJSONArrayFromURL();
 			System.out.println(myJSONArray.toString());
+			
+			JSONParser jsoP = new JSONParser(myJSON);
+			jsoP.parseJSONObject();
+			
+			JSONParser jsoP2 = new JSONParser(myJSONArray);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

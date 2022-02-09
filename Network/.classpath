@@ -6,6 +6,10 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="json-20211205.jar"/>
+	<classpathentry kind="lib" path="json-20211205.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/Network/json-20211205-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
