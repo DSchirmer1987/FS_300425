@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
@@ -16,11 +17,12 @@ public class MulClient {
 	}
 	
 	private void multiply(String factor1, String factor2) {
-		try(Socket socket = new Socket("192.168.226.132", this.port);
+		try(Socket socket = new Socket("localhost", this.port);
 			Scanner in = new Scanner(socket.getInputStream(), "UTF-8");
 			Writer osw = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
 			PrintWriter out = new PrintWriter(osw, true)){
 			
+			System.out.println(socket.getLocalPort());
 			out.println(factor1);
 			out.println(factor2);
 			System.out.println("Ergebnis: " + in.nextLine());

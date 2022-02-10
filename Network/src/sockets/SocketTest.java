@@ -8,7 +8,7 @@ import java.net.UnknownHostException;
 public class SocketTest {
 	public static void main(String[] args) {
 		System.err.println("Dies ist ein fehler!");
-		try(Socket socket = new Socket("192.168.226.132", 12345)){
+		try(Socket socket = new Socket("naughty.java.club", 80)){
 //			Socket socket2 = new Socket(socket.getInetAddress(), socket.getPort());
 			
 			System.out.println(InetAddress.getLocalHost());
