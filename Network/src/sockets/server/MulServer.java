@@ -14,6 +14,9 @@ public class MulServer {
 	
 	public MulServer(int port) {
 		this.port = port;
+	}
+	
+	public void starte() {
 		try(ServerSocket server = new ServerSocket(this.port)){
 			while(true) {
 				try(Socket client = server.accept()){
