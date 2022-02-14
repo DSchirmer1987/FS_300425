@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import junitdemo.ReverseStrings;
@@ -40,6 +41,7 @@ class ReverseStringsTest {
 	 * Testen von Exceptions
 	 */
 	@Test
+	@DisplayName("Leeren String umdrehen.")
 	void reverse_null_string() {
 		try {
 			ReverseStrings.reverse(null);
