@@ -35,5 +35,25 @@ class ReverseStringsTest {
 		//Assert mit primitiven DatenTypen
 		assertEquals(123, 123);
 	}
+	
+	/*
+	 * Testen von Exceptions
+	 */
+	@Test
+	void reverse_null_string() {
+		try {
+			ReverseStrings.reverse(null);
+			fail("Sollte eine IllegalArgumentException werfen.");
+		} catch (IllegalArgumentException e) {
+			
+		}
+	}
+	
+	@Test
+	void reverse_null_string_02() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			ReverseStrings.reverse(null);}
+		);
+	}
 
 }
