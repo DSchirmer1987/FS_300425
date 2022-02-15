@@ -1,6 +1,7 @@
 package com.cc_student.Kaffeestube;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -17,4 +18,9 @@ public class AppTest
     {
         assertTrue( true );
     }
+    
+//    @Test
+//    public void shouldFail() {
+//    	fail("Du sollst fehlschlagen!");
+//    }
 }
