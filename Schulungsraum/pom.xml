@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.cc_student</groupId>
   <artifactId>Schulungsraum</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>Schulungsraum</name>
   <description>
@@ -12,7 +12,137 @@
   <organization>
   	<name>Daniel Schirmer</name>
   </organization>
+  
+  <developers>
+  	<developer>
+  		<id>DSCH</id>
+  		<name>Daniel Schirmer</name>
+  		<email>Dschirmer@example.org</email>
+  		<roles>
+  			<role>Entwickler</role>
+  		</roles>
+  		<timezone>+1</timezone>
+  	</developer>
+  </developers>
+  
+  <!-- Lizenzen -->
+  <licenses>
+  	<license>
+  		<name>LGPL</name>
+  	</license>
+  </licenses>
+  
   <!-- Properties / Eigenschaften des Projektes -->
   <properties>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	<maven.compiler.source>16</maven.compiler.source>
+  	<maven.compiler.target>16</maven.compiler.target>
   </properties>
+  
+  <!-- Abhängigkeiten/Dependencies -->
+  <dependencies>
+  	<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
+	<dependency>
+	    <groupId>org.junit.jupiter</groupId>
+	    <artifactId>junit-jupiter-engine</artifactId>
+	    <version>5.8.2</version>
+	    <scope>test</scope>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+	<dependency>
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-lang3</artifactId>
+	    <version>3.12.0</version>
+	</dependency>
+  </dependencies>
+  
+  <!-- Build-Prozess / Steuerung wie das Projekt gebaut werden soll -->
+  <build>
+  	<!-- https://maven.apache.org/plugins/index.html  | Maven-Plugins mit Versionsnummer -->
+  	<pluginManagement>
+  		<plugins>
+  			<plugin>
+  				<artifactId>maven-clean-plugin</artifactId>
+  				<version>3.1.0</version>
+  			</plugin>
+  			<plugin>
+  				<artifactId>maven-surefire-plugin</artifactId>
+  				<version>3.0.0-M5</version>
+  			</plugin>
+  			<plugin>
+  				<artifactId>maven-resources-plugin</artifactId>
+  				<version>3.2.0</version>
+  			</plugin>
+  			<plugin>
+  				<artifactId>maven-jar-plugin</artifactId>
+  				<version>3.2.2</version>
+  			</plugin>
+  			<plugin>
+  				<artifactId>maven-install-plugin</artifactId>
+  				<version>3.0.0-M1</version>
+  			</plugin>
+  			<plugin>
+  				<artifactId>maven-deploy-plugin</artifactId>
+  				<version>3.0.0-M2</version>
+  			</plugin>
+  			<plugin>
+  				<artifactId>maven-site-plugin</artifactId>
+  				<version>3.10.0</version>
+  				<configuration>
+  					<locales>de,en,fr</locales>
+  				</configuration>
+  			</plugin>  			
+  		</plugins>
+  	</pluginManagement>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-compiler-plugin</artifactId>
+  			<version>3.10.0</version> <!-- Version 3.8.1 muss ab Java 9 benutzt werden -->
+  			<executions>
+  				<execution>
+  					<id>default-compile</id>
+  					<phase>compile</phase>
+  					<goals>
+  						<goal>compile</goal>
+  					</goals>
+  				</execution>
+  				<execution>
+  					<id>default-test-compile</id>
+  					<phase>test-compile</phase>
+  					<goals>
+  						<goal>testCompile</goal>
+  					</goals>
+  				</execution>
+  			</executions>
+  		</plugin>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-javadoc-plugin</artifactId>
+  			<version>3.3.1</version>
+  			<executions>
+  				<execution>
+  					<phase>package</phase>
+  					<goals>
+  						<goal>javadoc</goal>
+  					</goals>
+  				</execution>
+  			</executions>
+  		</plugin>
+  	</plugins>
+  </build>
+  <reporting>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-javadoc-plugin</artifactId>
+  			<version>3.3.1</version>
+  		</plugin>
+  		<plugin>
+        	<groupId>org.apache.maven.plugins</groupId>
+        	<artifactId>maven-surefire-report-plugin</artifactId>
+        	<version>3.0.0-M5</version>
+      </plugin>
+  	</plugins>
+  </reporting>
 </project>
