@@ -1,7 +1,11 @@
 package com.cc_student.schulungsraum.model;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +31,19 @@ public class ConfigReader {
 		// Zuerst die XMLInputFactory aufbauen, welche mit dem Input einer XML arbeitet.
 		XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 		ClassLoader cl = getClass().getClassLoader();
-		InputStream is = cl.getResourceAsStream(file);
+//		InputStream is = cl.getResourceAsStream(file);
+		InputStream is = null;
+		Path p = Paths.get(file);
+		if(Files.exists(p)) {
+			System.out.println("Datei gefunden");
+			try {
+				is = new FileInputStream(file);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+		} else {
+			is = cl.getResourceAsStream("config.xml");
+		}
 		try {
 			XMLEventReader eventReader = inputFactory.createXMLEventReader(is);
 			Tier tier = null;
