@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<item>
+		<name>Schwein</name>
+		<preis>42</preis>
+	</item>
+	<item>
+		<name>Kuh</name>
+		<preis>57</preis>
+	</item>
+	<item>
+		<name>Schaf</name>
+		<preis>91</preis>
+	</item>
+</config>
