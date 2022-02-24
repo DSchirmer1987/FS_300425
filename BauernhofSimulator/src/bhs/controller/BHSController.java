@@ -54,6 +54,10 @@ public class BHSController {
 	private JButton btnPflanzen;
 	private ArrayList<Feld> felder;
 	private ZuchtStallPanel[] zuchtStallPanels;
+	private String[] tiere = {"Kuh", "Schaf", "Schwein"};
+	private Kuh[] kuehe = {new Kuh(), new Kuh(), new Kuh()};
+	private Integer[] anzahl = {kuehe.length,2,3};
+	
 	
 	public BHSController() {
 		EventQueue.invokeLater(new Runnable() {
@@ -149,8 +153,6 @@ public class BHSController {
 	
 	public void setTiere() {
 //		Daten für Tiere holen
-		String[] tiere = {"Kuh", "Schaf", "Schwein"};
-		Integer[] anzahl = {1,2,3};
 		this.tierListe.setModel(new AbstractListModel<String>() {
 			String[] values = tiere;
 			public int getSize() {
@@ -211,7 +213,6 @@ public class BHSController {
 	
 	public void setKuehe() {
 		// Daten holen
-		Kuh[] kuehe = {new Kuh(), new Kuh(), new Kuh()};
 		this.kuhListe.setModel(new AbstractListModel<Kuh>() {
 			public int getSize() {
 				return kuehe.length;
@@ -309,7 +310,13 @@ public class BHSController {
 		this.btnNewRound.addActionListener(new ActionListener() {			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mtp.setSelectedIndex(0);	
+				mtp.setSelectedIndex(0);
+				for (Kuh kuh : kuehe) {
+					kuh.setAlter(kuh.getAlter() + 1);
+				}
+//				for(int i = 0; i < kuehe.length; i++) {
+//					kuehe[i].setAlter(kuehe[i].getAlter() + 1);
+//				}
 			}
 		});
 	}
