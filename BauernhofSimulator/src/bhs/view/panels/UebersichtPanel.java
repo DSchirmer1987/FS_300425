@@ -14,7 +14,7 @@ public class UebersichtPanel extends JPanel {
 	private JList<String> pflanzenListe;
 	private JList<String> produktListe;
 	private JList<String> tierListe;
-	private JList<Integer> produktAnzahl;
+	private JList<Number> produktAnzahl;
 	private JList<Integer> tierAnzahl;
 	private JList<Integer> pflanzenAnzahl;
 	
@@ -30,7 +30,7 @@ public class UebersichtPanel extends JPanel {
 		return tierListe;
 	}
 
-	public JList<Integer> getProduktAnzahl() {
+	public JList<Number> getProduktAnzahl() {
 		return produktAnzahl;
 	}
 
@@ -85,7 +85,7 @@ public class UebersichtPanel extends JPanel {
 		produktListe = new JList<String>();
 		panel_2.add(produktListe, BorderLayout.CENTER);
 		
-		produktAnzahl = new JList<Integer>();
+		produktAnzahl = new JList<Number>();
 		panel_2.add(produktAnzahl, BorderLayout.EAST);
 		
 		pflanzenListe.setSelectionModel(new DisabledItemSelection());

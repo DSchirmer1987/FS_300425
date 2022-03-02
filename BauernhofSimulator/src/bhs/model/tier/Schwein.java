@@ -11,7 +11,11 @@ public class Schwein extends Tier{
 	public double schlachten() {
 		Random r =  new Random();
 		double prozentsatz = 0.5 + (0.75 - 0.5) * r.nextDouble();
-		prozentsatz = Math.round(prozentsatz*100) / 100;
-		return Math.round(this.getGewicht() * prozentsatz * 1000) / 1000;
+		double tmpGewicht = this.getGewicht() * prozentsatz;
+		tmpGewicht = tmpGewicht * Math.pow(10, 2);
+		tmpGewicht = (int) tmpGewicht;
+		tmpGewicht = (double) tmpGewicht / Math.pow(10, 2);
+		
+		return tmpGewicht;
 	}
 }

@@ -6,12 +6,14 @@ public abstract class Tier {
 	private Integer hunger;
 	private Boolean erwachsen;
 	private String status;
+	private Boolean actionPerformend;
 	
 	public Tier() {
 		this.alter = 1;
 		this.gewicht = 5.00;
 		this.hunger = 0;
 		this.erwachsen = false;
+		this.actionPerformend = false;
 	}
 
 	public Integer getAlter() {
@@ -49,6 +51,14 @@ public abstract class Tier {
 		this.erwachsen = erwachsen;
 	}
 	
+	public Boolean getActionPerformend() {
+		return actionPerformend;
+	}
+
+	public void setActionPerformend(Boolean actionPerformend) {
+		this.actionPerformend = actionPerformend;
+	}
+
 	public String toString() {
 		return "Alter: " + this.getAlter() + " Gewicht: " + this.getGewicht() + " " + this.getStatus();
 	}

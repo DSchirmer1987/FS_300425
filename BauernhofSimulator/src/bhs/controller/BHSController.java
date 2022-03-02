@@ -34,7 +34,7 @@ public class BHSController {
 	private JList<String> pflanzenListe;
 	private JList<String> produktListe;
 	private JList<String> tierListe;
-	private JList<Integer> produktAnzahl;
+	private JList<Number> produktAnzahl;
 	private JList<Integer> tierAnzahl;
 	private JList<Integer> pflanzenAnzahl;
 	private JList<Kuh> kuhListe;
@@ -57,7 +57,8 @@ public class BHSController {
 	private String[] tiere = {"Kuh", "Schaf", "Schwein"};
 	private Kuh[] kuehe = {new Kuh(), new Kuh(), new Kuh()};
 	private Integer[] anzahl = {kuehe.length,2,3};
-	
+	private Integer milchmenge;
+	private Double speckmenge;
 	
 	public BHSController() {
 		EventQueue.invokeLater(new Runnable() {
@@ -105,6 +106,8 @@ public class BHSController {
 		this.setStatus();
 		this.setCBPflanzen();
 		this.felder = new ArrayList<Feld>();
+		this.milchmenge = 0;
+		this.speckmenge = 0.0;
 		// Listeners
 		this.setTabChangeListener();
 		this.setNewRoundAction();
@@ -176,7 +179,7 @@ public class BHSController {
 	public void setProdukte() {
 //		Daten für Produkte holen
 		String[] produkte = {"Milch", "Wolle", "Speck"};
-		Integer[] anzahl = {1,2,3};
+		Number[] anzahl = {this.milchmenge,2, this.speckmenge};
 		this.produktListe.setModel(new AbstractListModel<String>() {
 			String[] values = produkte;
 			public int getSize() {
@@ -186,12 +189,12 @@ public class BHSController {
 				return values[index];
 			}
 		});
-		this.produktAnzahl.setModel(new AbstractListModel<Integer>() {
-			Integer[] values = anzahl;
+		this.produktAnzahl.setModel(new AbstractListModel<Number>() {
+			Number[] values = anzahl;
 			public int getSize() {
 				return values.length;
 			}
-			public Integer getElementAt(int index) {
+			public Number getElementAt(int index) {
 				return values[index];
 			}
 		});		
@@ -313,6 +316,7 @@ public class BHSController {
 				mtp.setSelectedIndex(0);
 				for (Kuh kuh : kuehe) {
 					kuh.setAlter(kuh.getAlter() + 1);
+					kuh.setActionPerformend(false);
 				}
 //				for(int i = 0; i < kuehe.length; i++) {
 //					kuehe[i].setAlter(kuehe[i].getAlter() + 1);
@@ -324,18 +328,20 @@ public class BHSController {
 	public void setMelkenAction() {
 		this.btnMelken.addActionListener(new ActionListener() {
 			ArrayList<Kuh> kuhAL;
-			Integer melkmenge = 0;
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Integer tmpMelkmenge = 0;
 				try {
 					kuhAL = (ArrayList<Kuh>) kuhListe.getSelectedValuesList();
 					System.out.println(kuhAL);
 					for (Kuh kuh : kuhAL) {
-						if(kuh.getErwachsen()) {
-							melkmenge += kuh.melken();
+						if(kuh.getErwachsen() && !kuh.getActionPerformend()) {
+							milchmenge += kuh.melken();
+							tmpMelkmenge += kuh.melken();
+							kuh.setActionPerformend(true);
 						}
 					}
-					System.out.println("Es wurde " + melkmenge + "L Milch erzeugt.");
+					System.out.println("Es wurde " + tmpMelkmenge + "L Milch erzeugt.");
 				} catch (ClassCastException e1) {
 					JOptionPane.showMessageDialog(frame, "Bitte mindestens eine Kuh auswählen", "Melken", JOptionPane.INFORMATION_MESSAGE);
 				}
@@ -368,15 +374,15 @@ public class BHSController {
 	public void setSchlachtenAction() {
 		this.btnSchlachten.addActionListener(new ActionListener() {
 			ArrayList<Schwein> schweinAL;
-			Double speckmenge = 0.0;
+//			Double speckmenge = 0.0;
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					schweinAL = (ArrayList<Schwein>) schweinListe.getSelectedValuesList();
 					for (Schwein schwein : schweinAL) {
-						if(schwein.getErwachsen()) {
+//						if(schwein.getErwachsen()) {
 							speckmenge += schwein.schlachten();
-						}
+//						}
 					}
 				} catch (ClassCastException e1) {
 					JOptionPane.showMessageDialog(frame, "Bitte mindestens ein Schwein auswählen", "Schlachten", JOptionPane.INFORMATION_MESSAGE);
